@@ -13,6 +13,8 @@
 		DE1F01FD24968110002ABF21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE1F01FC24968110002ABF21 /* Assets.xcassets */; };
 		DE1F020024968110002ABF21 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DE1F01FF24968110002ABF21 /* Preview Assets.xcassets */; };
 		DE1F020324968110002ABF21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE1F020124968110002ABF21 /* LaunchScreen.storyboard */; };
+		DE1F020C2496814A002ABF21 /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F020B2496814A002ABF21 /* FeedView.swift */; };
+		DE48D55E24968B8800F19C52 /* Billabong.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DE48D55D24968AA100F19C52 /* Billabong.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		DE1F01FF24968110002ABF21 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DE1F020224968110002ABF21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DE1F020424968110002ABF21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE1F020B2496814A002ABF21 /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
+		DE48D55D24968AA100F19C52 /* Billabong.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Billabong.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +60,10 @@
 		DE1F01F52496810F002ABF21 /* MyPhotoApp */ = {
 			isa = PBXGroup;
 			children = (
+				DE48D55C24968A8300F19C52 /* Fonts */,
+				DE1F020A2496812E002ABF21 /* Views */,
 				DE1F01F62496810F002ABF21 /* AppDelegate.swift */,
 				DE1F01F82496810F002ABF21 /* SceneDelegate.swift */,
-				DE1F01FA2496810F002ABF21 /* ContentView.swift */,
 				DE1F01FC24968110002ABF21 /* Assets.xcassets */,
 				DE1F020124968110002ABF21 /* LaunchScreen.storyboard */,
 				DE1F020424968110002ABF21 /* Info.plist */,
@@ -73,6 +78,23 @@
 				DE1F01FF24968110002ABF21 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		DE1F020A2496812E002ABF21 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DE1F01FA2496810F002ABF21 /* ContentView.swift */,
+				DE1F020B2496814A002ABF21 /* FeedView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DE48D55C24968A8300F19C52 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DE48D55D24968AA100F19C52 /* Billabong.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,6 +158,7 @@
 				DE1F020324968110002ABF21 /* LaunchScreen.storyboard in Resources */,
 				DE1F020024968110002ABF21 /* Preview Assets.xcassets in Resources */,
 				DE1F01FD24968110002ABF21 /* Assets.xcassets in Resources */,
+				DE48D55E24968B8800F19C52 /* Billabong.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +169,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE1F020C2496814A002ABF21 /* FeedView.swift in Sources */,
 				DE1F01F72496810F002ABF21 /* AppDelegate.swift in Sources */,
 				DE1F01F92496810F002ABF21 /* SceneDelegate.swift in Sources */,
 				DE1F01FB2496810F002ABF21 /* ContentView.swift in Sources */,
