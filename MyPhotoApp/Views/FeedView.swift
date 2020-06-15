@@ -12,21 +12,47 @@ func screenSize() -> CGSize {
     return UIScreen.main.bounds.size
 }
 
+struct Post: Identifiable {
+    var id = UUID()
+    var show: Bool
+}
+
+let postData = [
+    Post(show: false),
+    Post(show: false),
+    Post(show: false),
+    Post(show: false),
+    Post(show: false)
+]
+
 struct FeedView: View {
+    @State var posts: [Post] = postData
+    @State var show: Bool = false
+    @State var activeIndex = -1
+    
     var body: some View {
         ZStack {
             VStack {
-                NavigationBarView()
+                NavigationBarView(show: self.$show)
                 Spacer()
                 VStack {
                     ScrollView {
-                        ForEach(1...5, id: \.self) { value in
-                            CardView()
+                        ForEach(posts.indices, id: \.self) { index in
+                            GeometryReader { geometry in
+                                CardView(post: self.$posts[index], show: self.$show, activeIndex: self.$activeIndex, index: index)
+                                    .offset(y: self.posts[index].show ? -geometry.frame(in: .global).minY + 40 : 0)
+                            }
+                            .frame(height: 400)
+                            .zIndex(self.posts[index].show ? 10 : 0)
+                            .offset(x: self.activeIndex != index && self.show ? screenSize().width : 0)
                         }
                     }
+                    .offset(y: self.show ? -100 : 0)
+                    .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
                 }
             }
         }
+        .statusBar(hidden: self.show ? true : false)
     }
 }
 
@@ -37,6 +63,8 @@ struct FeedView_Previews: PreviewProvider {
 }
 
 struct NavigationBarView: View {
+    @Binding var show: Bool
+    
     var body: some View {
         VStack {
             HStack(alignment: .center, spacing: 8) {
@@ -63,6 +91,8 @@ struct NavigationBarView: View {
             .padding()
             .background(Color.white)
         }
+        .opacity(self.show ? 0 : 1)
+        .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
     }
 }
 
@@ -77,46 +107,62 @@ struct RoundedImageView: View {
 }
 
 struct CardView: View {
+    @Binding var post: Post
+    @Binding var show: Bool
+    @Binding var activeIndex: Int
+    var index: Int
+    
     var body: some View {
-        VStack {
-            HStack {
-                RoundedImageView()
-                    .frame(width: 25, height: 25)
-                    .padding(.leading)
-                VStack(alignment: .leading) {
-                    Text("mille_f").font(.footnote).fontWeight(.bold)
-                    HStack(alignment: .center) {
-                        Text("London, England").font(.footnote).foregroundColor(.secondary)
-                        Spacer()
-                        Text("2 minutes ago").font(.caption).foregroundColor(.secondary)
+        ZStack {
+            VStack {
+                HStack {
+                    RoundedImageView()
+                        .frame(width: 25, height: 25)
+                        .padding(.leading)
+                    VStack(alignment: .leading) {
+                        Text("mille_f").font(.footnote).fontWeight(.bold)
+                        HStack(alignment: .center) {
+                            Text("London, England").font(.footnote).foregroundColor(.secondary)
+                            Spacer()
+                            Text("2 minutes ago").font(.caption).foregroundColor(.secondary)
+                        }
                     }
+                    .padding(.trailing)
                 }
-                .padding(.trailing)
+                RoundedImageView(cornerRadius: 20)
+                    .padding(.leading)
+                    .padding(.trailing)
+                    .shadow(color: Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), radius: 15, x: 5, y: 10)
+                    .frame(width: screenSize().width, height: 300)
+                
+                HStack(alignment: .center, spacing: 30) {
+                    Button(action: {}) {
+                        HStack {
+                            Image(systemName: "heart").font(Font.headline.weight(.semibold))
+                            Text("20").font(.caption)
+                        }
+                        
+                    }.foregroundColor(.black)
+                    Button(action: {}) {
+                        HStack {
+                            Image(systemName: "bubble.right").font(Font.headline.weight(.semibold))
+                            Text("17").font(.caption)
+                        }
+                        
+                    }.foregroundColor(.black)
+                    Spacer()
+                }.padding()
             }
-            RoundedImageView(cornerRadius: 20)
-                .padding(.leading)
-                .padding(.trailing)
-                .shadow(color: Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), radius: 15, x: 5, y: 10)
-                .frame(width: screenSize().width, height: 300)
-            
-            HStack(alignment: .center, spacing: 30) {
-                Button(action: {}) {
-                    HStack {
-                        Image(systemName: "heart").font(Font.headline.weight(.semibold))
-                        Text("20").font(.caption)
-                    }
-                    
-                }.foregroundColor(.black)
-                Button(action: {}) {
-                    HStack {
-                        Image(systemName: "bubble.right").font(Font.headline.weight(.semibold))
-                        Text("17").font(.caption)
-                    }
-                    
-                }.foregroundColor(.black)
-                Spacer()
-            }.padding()
-            
         }
+        .onTapGesture {
+            self.post.show.toggle()
+            self.show.toggle()
+            if self.post.show {
+                self.activeIndex = self.index
+            } else {
+                self.activeIndex = -1
+            }
+        }
+        .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
     }
 }
