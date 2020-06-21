@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E75CED4249FD21E00B183DC /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75CED3249FD21E00B183DC /* FeedViewModel.swift */; };
 		DE1F01F72496810F002ABF21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F01F62496810F002ABF21 /* AppDelegate.swift */; };
 		DE1F01F92496810F002ABF21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F01F82496810F002ABF21 /* SceneDelegate.swift */; };
 		DE1F01FB2496810F002ABF21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F01FA2496810F002ABF21 /* ContentView.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E75CED3249FD21E00B183DC /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		DE1F01F32496810F002ABF21 /* MyPhotoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPhotoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE1F01F62496810F002ABF21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE1F01F82496810F002ABF21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6E75CED2249FD20E00B183DC /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				6E75CED3249FD21E00B183DC /* FeedViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		DE1F01EA2496810F002ABF21 = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +70,7 @@
 		DE1F01F52496810F002ABF21 /* MyPhotoApp */ = {
 			isa = PBXGroup;
 			children = (
+				6E75CED2249FD20E00B183DC /* ViewModels */,
 				DE48D55C24968A8300F19C52 /* Fonts */,
 				DE1F020A2496812E002ABF21 /* Views */,
 				DE1F01F62496810F002ABF21 /* AppDelegate.swift */,
@@ -169,6 +180,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E75CED4249FD21E00B183DC /* FeedViewModel.swift in Sources */,
 				DE1F020C2496814A002ABF21 /* FeedView.swift in Sources */,
 				DE1F01F72496810F002ABF21 /* AppDelegate.swift in Sources */,
 				DE1F01F92496810F002ABF21 /* SceneDelegate.swift in Sources */,

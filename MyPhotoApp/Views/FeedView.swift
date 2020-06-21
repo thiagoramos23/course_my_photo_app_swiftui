@@ -13,26 +13,37 @@ func screenSize() -> CGSize {
 }
 
 struct FeedView: View {
+    @ObservedObject var feedViewModel: FeedViewModel
+    
+    init(feedViewModel: FeedViewModel) {
+        self.feedViewModel = feedViewModel
+    }
+    
     var body: some View {
         ZStack {
             VStack {
                 NavigationBarView()
                 Spacer()
                 VStack {
-                    ScrollView {
-                        ForEach(1...5, id: \.self) { value in
-                            CardView()
+                    if !self.feedViewModel.posts.isEmpty {
+                        ScrollView {
+                            ForEach(self.feedViewModel.posts) { post in
+                                CardView(post: post)
+                            }
                         }
                     }
                 }
             }
+        }
+        .onAppear {
+            self.feedViewModel.loadPosts()
         }
     }
 }
 
 struct FeedView_Previews: PreviewProvider {
     static var previews: some View {
-        FeedView()
+        FeedView(feedViewModel: FeedViewModel())
     }
 }
 
@@ -46,7 +57,7 @@ struct NavigationBarView: View {
                 }
                 .foregroundColor(.black)
                 Spacer()
-                Text("Instagram")
+                Text("PhotoApp")
                     .font(Font.custom("Billabong", size: 26))
                 Spacer()
                 Button(action: {}) {
@@ -67,33 +78,36 @@ struct NavigationBarView: View {
 }
 
 struct RoundedImageView: View {
-    var image: UIImage = #imageLiteral(resourceName: "friends")
+    var imageName: String = "woman"
     var cornerRadius: CGFloat = 5
     var body: some View {
-        Image(uiImage: image)
+        Image(imageName)
             .resizable()
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 }
 
 struct CardView: View {
+    var post: Post
+    
     var body: some View {
         VStack {
             HStack {
-                RoundedImageView()
-                    .frame(width: 25, height: 25)
+                RoundedImageView(imageName: post.userImageUrl)
+                    .frame(width: 36, height: 25)
                     .padding(.leading)
+                
                 VStack(alignment: .leading) {
-                    Text("mille_f").font(.footnote).fontWeight(.bold)
+                    Text(post.username).font(.footnote).fontWeight(.bold)
                     HStack(alignment: .center) {
-                        Text("London, England").font(.footnote).foregroundColor(.secondary)
+                        Text(post.location).font(.footnote).foregroundColor(.secondary)
                         Spacer()
-                        Text("2 minutes ago").font(.caption).foregroundColor(.secondary)
+                        Text(post.timePostedSinceNow).font(.caption).foregroundColor(.secondary)
                     }
                 }
                 .padding(.trailing)
             }
-            RoundedImageView(cornerRadius: 20)
+            RoundedImageView(imageName: post.postImageUrl, cornerRadius: 20)
                 .padding(.leading)
                 .padding(.trailing)
                 .shadow(color: Color(#colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)), radius: 15, x: 5, y: 10)
@@ -103,14 +117,14 @@ struct CardView: View {
                 Button(action: {}) {
                     HStack {
                         Image(systemName: "heart").font(Font.headline.weight(.semibold))
-                        Text("20").font(.caption)
+                        Text("\(post.likeCount)").font(.caption)
                     }
                     
                 }.foregroundColor(.black)
                 Button(action: {}) {
                     HStack {
                         Image(systemName: "bubble.right").font(Font.headline.weight(.semibold))
-                        Text("17").font(.caption)
+                        Text("\(post.commentCount)").font(.caption)
                     }
                     
                 }.foregroundColor(.black)
