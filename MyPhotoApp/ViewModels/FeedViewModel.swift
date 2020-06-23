@@ -10,39 +10,30 @@ import Foundation
 import SwiftUI
 import Combine
 
-struct Post: Identifiable {
-    var id: UUID = UUID()
-    var userImageUrl: String
-    var username: String
-    var location: String
-    var timePostedSinceNow: String
-    var postImageUrl: String
-    var commentCount: Int
-    var likeCount: Int
+enum FeedViewState {
+    case loading, ready
 }
 
-let postData = [
-    Post(userImageUrl: "woman", username: "mile_f", location: "London, Englang", timePostedSinceNow: "2 minutes ago", postImageUrl: "show", commentCount: 3, likeCount: 5),
-    Post(userImageUrl: "woman", username: "carmen_sandiego", location: "Rio de Janeiro, Brazil", timePostedSinceNow: "10 minutes ago", postImageUrl: "friends", commentCount: 3, likeCount: 5),
-    Post(userImageUrl: "woman", username: "lucas_p", location: "London, England", timePostedSinceNow: "5 hours ago", postImageUrl: "lake", commentCount: 3, likeCount: 5),
-    Post(userImageUrl: "woman", username: "katia_s", location: "New York, USA", timePostedSinceNow: "1 day ago", postImageUrl: "trees", commentCount: 3, likeCount: 5),
-    Post(userImageUrl: "woman", username: "mile_f", location: "Berlin, Germany", timePostedSinceNow: "1 month ago", postImageUrl: "show", commentCount: 3, likeCount: 5)
-]
 
 class FeedViewModel: ObservableObject {
     @Published var posts: [Post]
     
+    var viewState: FeedViewState
     var cancellable: AnyCancellable?
     
     init() {
         self.posts = []
+        self.viewState = .loading
     }
     
     func loadPosts() {
         let subject = PassthroughSubject<[Post], Never>()
-        cancellable = subject.sink(receiveValue: { posts in
-            self.posts = posts
-        })
+        cancellable = subject
+            .delay(for: 2, scheduler: RunLoop.main)
+            .sink(receiveValue: { posts in
+                self.posts = posts
+                self.viewState = .ready
+            })
         
         subject.send(postData)
     }
