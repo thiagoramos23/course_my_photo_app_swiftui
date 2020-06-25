@@ -11,30 +11,50 @@ import SwiftUI
 import Combine
 
 enum FeedViewState {
-    case loading, ready
+    case loading, ready, error
 }
 
 
 class FeedViewModel: ObservableObject {
     @Published var posts: [Post]
+    @Published var errorMessage: String
     
     var viewState: FeedViewState
     var cancellable: AnyCancellable?
+    var postRepository: PostRepository = PostRepository()
     
     init() {
         self.posts = []
+        self.errorMessage = ""
         self.viewState = .loading
     }
     
     func loadPosts() {
-        let subject = PassthroughSubject<[Post], Never>()
-        cancellable = subject
-            .delay(for: 2, scheduler: RunLoop.main)
-            .sink(receiveValue: { posts in
-                self.posts = posts
-                self.viewState = .ready
-            })
+//        let subject = PassthroughSubject<[Post], Never>()
+//        cancellable = subject
+//            .delay(for: 2, scheduler: RunLoop.main)
+//            .sink(receiveValue: { posts in
+//                self.posts = posts
+//                self.viewState = .ready
+//            })
         
-        subject.send(postData)
+//        subject.send(postData)
+        
+        cancellable = postRepository.loadPosts()
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    self.viewState = .ready
+                case.failure(let error):
+                    self.viewState = .error
+                    DispatchQueue.main.async {
+                        self.errorMessage = error.localizedDescription
+                    }
+                }
+            }) { posts in
+                DispatchQueue.main.async {
+                    self.posts = posts
+                }
+            }
     }
 }

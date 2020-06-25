@@ -58,6 +58,6 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(post: Post(userImageUrl: "woman", username: "mile_f", location: "London, Englang", timePostedSinceNow: "2 minutes ago", postImageUrl: "show", commentCount: 3, likeCount: 5))
+        CardView(post: Post(id: 1, userImageUrl: "woman", username: "mile_f", location: "London, Englang", timePostedSinceNow: "2 minutes ago", postImageUrl: "show", commentCount: 3, likeCount: 5))
     }
 }

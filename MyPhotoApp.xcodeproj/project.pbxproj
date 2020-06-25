@@ -14,6 +14,7 @@
 		6E75CEDD24A0362800B183DC /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75CEDC24A0362800B183DC /* ColorExtensions.swift */; };
 		6ED7723024A18D8200C57640 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7722F24A18D8200C57640 /* Post.swift */; };
 		6ED7723324A1916300C57640 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7723224A1916300C57640 /* ActivityIndicatorView.swift */; };
+		6EE2D19B24A4307800FB55AE /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE2D19A24A4307700FB55AE /* PostRepository.swift */; };
 		DE1F01F72496810F002ABF21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F01F62496810F002ABF21 /* AppDelegate.swift */; };
 		DE1F01F92496810F002ABF21 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F01F82496810F002ABF21 /* SceneDelegate.swift */; };
 		DE1F01FB2496810F002ABF21 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1F01FA2496810F002ABF21 /* ContentView.swift */; };
@@ -32,6 +33,7 @@
 		6E75CEDC24A0362800B183DC /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		6ED7722F24A18D8200C57640 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		6ED7723224A1916300C57640 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		6EE2D19A24A4307700FB55AE /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
 		DE1F01F32496810F002ABF21 /* MyPhotoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPhotoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE1F01F62496810F002ABF21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE1F01F82496810F002ABF21 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,14 @@
 			path = UIKitRepresentable;
 			sourceTree = "<group>";
 		};
+		6EE2D19924A4306400FB55AE /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				6EE2D19A24A4307700FB55AE /* PostRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
 		DE1F01EA2496810F002ABF21 = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +116,7 @@
 		DE1F01F52496810F002ABF21 /* MyPhotoApp */ = {
 			isa = PBXGroup;
 			children = (
+				6EE2D19924A4306400FB55AE /* Repositories */,
 				6ED7723124A1911500C57640 /* UIKitRepresentable */,
 				6ED7722E24A18D7300C57640 /* Models */,
 				6E75CEDB24A0361500B183DC /* extensions */,
@@ -223,6 +234,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E75CED8249FD7CB00B183DC /* CardView.swift in Sources */,
+				6EE2D19B24A4307800FB55AE /* PostRepository.swift in Sources */,
 				6E75CED4249FD21E00B183DC /* FeedViewModel.swift in Sources */,
 				6E75CEDA249FD80800B183DC /* NavigationBarView.swift in Sources */,
 				DE1F020C2496814A002ABF21 /* FeedView.swift in Sources */,
