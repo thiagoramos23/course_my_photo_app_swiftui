@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E20E9BA24A80E8D00BC0F5A /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20E9B924A80E8D00BC0F5A /* Comment.swift */; };
+		6E20E9BC24A8DD8200BC0F5A /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20E9BB24A8DD8200BC0F5A /* CommentsView.swift */; };
+		6E20E9BE24A8DE2B00BC0F5A /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20E9BD24A8DE2B00BC0F5A /* CommentView.swift */; };
+		6E20E9C024A8EE5800BC0F5A /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20E9BF24A8EE5800BC0F5A /* CommentsViewModel.swift */; };
+		6E20E9C224A8EEDB00BC0F5A /* CommentsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20E9C124A8EEDB00BC0F5A /* CommentsRepository.swift */; };
 		6E75CED4249FD21E00B183DC /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75CED3249FD21E00B183DC /* FeedViewModel.swift */; };
 		6E75CED6249FD79900B183DC /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75CED5249FD79900B183DC /* RoundedImageView.swift */; };
 		6E75CED8249FD7CB00B183DC /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75CED7249FD7CB00B183DC /* CardView.swift */; };
@@ -28,6 +33,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E20E9B924A80E8D00BC0F5A /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		6E20E9BB24A8DD8200BC0F5A /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		6E20E9BD24A8DE2B00BC0F5A /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
+		6E20E9BF24A8EE5800BC0F5A /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		6E20E9C124A8EEDB00BC0F5A /* CommentsRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsRepository.swift; sourceTree = "<group>"; };
 		6E75CED3249FD21E00B183DC /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		6E75CED5249FD79900B183DC /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		6E75CED7249FD7CB00B183DC /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -66,6 +76,7 @@
 			children = (
 				6E75CED3249FD21E00B183DC /* FeedViewModel.swift */,
 				6E8F754924A6F4A2000AB966 /* ImageViewModel.swift */,
+				6E20E9BF24A8EE5800BC0F5A /* CommentsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -82,6 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				6ED7722F24A18D8200C57640 /* Post.swift */,
+				6E20E9B924A80E8D00BC0F5A /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -99,6 +111,7 @@
 			children = (
 				6EE2D19A24A4307700FB55AE /* PostRepository.swift */,
 				6E8F754724A6F067000AB966 /* ImageRepository.swift */,
+				6E20E9C124A8EEDB00BC0F5A /* CommentsRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -155,6 +168,8 @@
 				6E75CED5249FD79900B183DC /* RoundedImageView.swift */,
 				6E75CED7249FD7CB00B183DC /* CardView.swift */,
 				6E75CED9249FD80800B183DC /* NavigationBarView.swift */,
+				6E20E9BB24A8DD8200BC0F5A /* CommentsView.swift */,
+				6E20E9BD24A8DE2B00BC0F5A /* CommentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -239,8 +254,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E20E9C024A8EE5800BC0F5A /* CommentsViewModel.swift in Sources */,
 				6E8F754A24A6F4A2000AB966 /* ImageViewModel.swift in Sources */,
+				6E20E9BE24A8DE2B00BC0F5A /* CommentView.swift in Sources */,
 				6E75CED8249FD7CB00B183DC /* CardView.swift in Sources */,
+				6E20E9C224A8EEDB00BC0F5A /* CommentsRepository.swift in Sources */,
 				6EE2D19B24A4307800FB55AE /* PostRepository.swift in Sources */,
 				6E75CED4249FD21E00B183DC /* FeedViewModel.swift in Sources */,
 				6E75CEDA249FD80800B183DC /* NavigationBarView.swift in Sources */,
@@ -249,9 +267,11 @@
 				6E75CEDD24A0362800B183DC /* ColorExtensions.swift in Sources */,
 				6E8F754824A6F067000AB966 /* ImageRepository.swift in Sources */,
 				6ED7723324A1916300C57640 /* ActivityIndicatorView.swift in Sources */,
+				6E20E9BA24A80E8D00BC0F5A /* Comment.swift in Sources */,
 				DE1F01F72496810F002ABF21 /* AppDelegate.swift in Sources */,
 				DE1F01F92496810F002ABF21 /* SceneDelegate.swift in Sources */,
 				DE1F01FB2496810F002ABF21 /* ContentView.swift in Sources */,
+				6E20E9BC24A8DD8200BC0F5A /* CommentsView.swift in Sources */,
 				6ED7723024A18D8200C57640 /* Post.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

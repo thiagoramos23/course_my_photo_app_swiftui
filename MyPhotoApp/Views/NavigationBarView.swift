@@ -8,9 +8,9 @@
 
 import SwiftUI
 
-struct NavigationBarView: View {
+struct NavigationBarView: View {    
     var body: some View {
-        VStack {
+        ZStack {
             HStack(alignment: .center, spacing: 8) {
                 Button(action: {}) {
                     Image(systemName: "camera")

@@ -14,39 +14,28 @@ enum ImageViewState {
     case loading, ready, error
 }
 
-class ImageViewModel: ObservableObject {
-    @Published var image: Image
+class ImageViewModel {
     
-    var viewState: ImageViewState
-    
-    var imageUrl       : String
     var imageRepository: ImageRepository
-    
     var cancellable: AnyCancellable?
     
-    init(imageUrl: String) {
-        self.image    = Image("woman")
-        self.imageUrl = imageUrl
-        self.viewState = .loading
+//    
+//    ImageViewModel.imageCache.setObject(data as NSData, forKey: imageUrl as NSString)
+//    DispatchQueue.main.async {
+//        self.data = data
+//    }
+    
+    init() {
         self.imageRepository = ImageRepository()
     }
     
-    func loadImage() {
-        cancellable = imageRepository
+    func loadImage(imageUrl: String) -> AnyPublisher<Data, Never> {
+        cancellable?.cancel()
+        
+        return imageRepository
             .loadImage(imageUrlString: imageUrl)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(_):
-                    self.viewState = .error
-                    break
-                case .finished:
-                    self.viewState = .ready
-                }
-            }, receiveValue: { data in
-                DispatchQueue.main.async {
-                    self.image = Image(uiImage: UIImage(data: data)!)
-                }
-            })
+            .replaceError(with: Data())
+            .eraseToAnyPublisher()
     }
     
 }

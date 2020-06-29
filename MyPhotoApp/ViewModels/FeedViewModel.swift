@@ -29,17 +29,7 @@ class FeedViewModel: ObservableObject {
         self.viewState = .loading
     }
     
-    func loadPosts() {
-//        let subject = PassthroughSubject<[Post], Never>()
-//        cancellable = subject
-//            .delay(for: 2, scheduler: RunLoop.main)
-//            .sink(receiveValue: { posts in
-//                self.posts = posts
-//                self.viewState = .ready
-//            })
-        
-//        subject.send(postData)
-        
+    func loadPosts() {        
         cancellable = postRepository.loadPosts()
             .sink(receiveCompletion: { completion in
                 switch completion {

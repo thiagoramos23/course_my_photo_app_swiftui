@@ -18,6 +18,8 @@ struct Post: Identifiable, Decodable {
     var commentCount: Int
     var likeCount: Int
     
+    var showComment: Bool = false
+    
     init(id: Int, userImageUrl: String, username: String, location: String, timePostedSinceNow: String, postImageUrl: String, commentCount: Int, likeCount: Int) {
         self.id = id
         self.userImageUrl = userImageUrl
