@@ -14,7 +14,7 @@ struct CardView: View {
     var body: some View {
         VStack {
             HStack {
-                RoundedImageView(imageViewModel: ImageViewModel(imageUrl: post.userImageUrl))
+                RoundedImageView(url: post.userImageUrl)
                     .frame(width: 36, height: 25)
                     .padding(.leading)
                 
@@ -28,7 +28,7 @@ struct CardView: View {
                 }
                 .padding(.trailing)
             }
-            RoundedImageView(imageViewModel: ImageViewModel(imageUrl: post.postImageUrl), cornerRadius: 20)
+            RoundedImageView(url: post.postImageUrl)
                 .padding(.leading)
                 .padding(.trailing)
                 .shadow(color: Color.defaultShadowColor(), radius: 15, x: 5, y: 10)

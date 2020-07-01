@@ -2,51 +2,62 @@
 //  ImageViewModel.swift
 //  MyPhotoApp
 //
-//  Created by Thiago Ramos on 27/06/20.
+//  Created by Thiago Ramos on 29/06/20.
 //  Copyright © 2020 Thiago Ramos. All rights reserved.
 //
 
 import Foundation
 import Combine
-import SwiftUI
 
 enum ImageViewState {
-    case loading, ready, error
+    case loading, ready
 }
 
 class ImageViewModel: ObservableObject {
-    @Published var image: Image
+    @Published var data: Data
+    var imageViewState: ImageViewState
     
-    var viewState: ImageViewState
+    var imageRepository: ImageRepository = ImageRepository()
     
-    var imageUrl       : String
-    var imageRepository: ImageRepository
+    init() {
+        self.data = Data()
+        self.imageViewState = .loading
+    }
     
     var cancellable: AnyCancellable?
     
-    init(imageUrl: String) {
-        self.image    = Image("woman")
-        self.imageUrl = imageUrl
-        self.viewState = .loading
-        self.imageRepository = ImageRepository()
-    }
-    
-    func loadImage() {
+    func loadImage(url: String) {
+        let cachedData = ImageCache.getFromCache(imageUrl: url)
+        if cachedData.count > 0 {
+            self.data = cachedData
+            return
+        }
+        
         cancellable = imageRepository
-            .loadImage(imageUrlString: imageUrl)
-            .sink(receiveCompletion: { completion in
-                switch completion {
-                case .failure(_):
-                    self.viewState = .error
-                    break
-                case .finished:
-                    self.viewState = .ready
-                }
-            }, receiveValue: { data in
+        .loadImage(url: url)
+        .replaceError(with: Data())
+            .sink { data in
                 DispatchQueue.main.async {
-                    self.image = Image(uiImage: UIImage(data: data)!)
+                    self.imageViewState = .ready
+                    self.data = data
                 }
-            })
+                ImageCache.setToCache(data: data, imageUrl: url)
+        }
+    }
+}
+
+struct ImageCache {
+    static let imageCache: NSCache = NSCache<NSString, NSData>()
+    
+    static func setToCache(data: Data, imageUrl: String) {
+        ImageCache.imageCache.setObject(data as NSData, forKey: imageUrl as NSString)
     }
     
+    static func getFromCache(imageUrl: String) -> Data {
+        if let data = ImageCache.imageCache.object(forKey: imageUrl as NSString) {
+            return data as Data
+        }
+        
+        return Data()
+    }
 }

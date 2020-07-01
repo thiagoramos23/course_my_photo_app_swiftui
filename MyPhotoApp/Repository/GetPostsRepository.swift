@@ -1,25 +1,19 @@
 //
-//  PostRepository.swift
+//  GetPostsRepository.swift
 //  MyPhotoApp
 //
-//  Created by Thiago Ramos on 24/06/20.
+//  Created by Thiago Ramos on 29/06/20.
 //  Copyright © 2020 Thiago Ramos. All rights reserved.
 //
 
 import Foundation
 import Combine
 
-let baseUrl = "http://localhost:3000/api/v1"
-
-enum NetworkError: Error {
-    case requestError
-}
-
-struct PostRepository {
-        
-    func loadPosts() -> AnyPublisher<[Post], Error> {
-        var request = URLRequest(url: URL(string: "\(baseUrl)/posts")!)
-        request.setValue("Bearer wc205k9tpUOZ364NInA6jIlh50TCTBR7QhNhpB1fBaI", forHTTPHeaderField: "Authorization")
+struct GetPostsRepository {
+    
+    func execute() -> AnyPublisher<[Post], Error> {
+        var request = URLRequest(url: URL(string: "http://localhost:3000/api/v1/posts")!)
+        request.setValue("Bearer CvejCjicyZVIUrDI2lf4ubc_MwFL-JyaT8-TKfhqOaw", forHTTPHeaderField: "Authorization")
         return URLSession
             .shared
             .dataTaskPublisher(for: request)
@@ -28,9 +22,10 @@ struct PostRepository {
                     httpResponse.statusCode == 200 else {
                         throw NetworkError.requestError
                 }
+                
                 return data
             }
-            .decode(type: [Post].self, decoder:  JSONDecoder())
+            .decode(type: [Post].self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
 }

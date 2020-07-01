@@ -16,6 +16,7 @@ func screenSize() -> CGSize {
 struct FeedView: View {
     @ObservedObject var feedViewModel: FeedViewModel
     
+    
     init(feedViewModel: FeedViewModel) {
         self.feedViewModel = feedViewModel
     }

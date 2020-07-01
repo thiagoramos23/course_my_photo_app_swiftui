@@ -14,14 +14,14 @@ enum FeedViewState {
     case loading, ready, error
 }
 
-
 class FeedViewModel: ObservableObject {
     @Published var posts: [Post]
     @Published var errorMessage: String
     
+    var getPostsRepository: GetPostsRepository = GetPostsRepository()
+    
     var viewState: FeedViewState
     var cancellable: AnyCancellable?
-    var postRepository: PostRepository = PostRepository()
     
     init() {
         self.posts = []
@@ -30,31 +30,20 @@ class FeedViewModel: ObservableObject {
     }
     
     func loadPosts() {
-//        let subject = PassthroughSubject<[Post], Never>()
-//        cancellable = subject
-//            .delay(for: 2, scheduler: RunLoop.main)
-//            .sink(receiveValue: { posts in
-//                self.posts = posts
-//                self.viewState = .ready
-//            })
-        
-//        subject.send(postData)
-        
-        cancellable = postRepository.loadPosts()
+        cancellable = getPostsRepository
+            .execute()
             .sink(receiveCompletion: { completion in
                 switch completion {
-                case .finished:
-                    self.viewState = .ready
-                case.failure(let error):
+                case .failure(_):
                     self.viewState = .error
-                    DispatchQueue.main.async {
-                        self.errorMessage = error.localizedDescription
-                    }
+                    break
+                case .finished: break
                 }
-            }) { posts in
+            }, receiveValue: { posts in
                 DispatchQueue.main.async {
+                    self.viewState = .ready
                     self.posts = posts
                 }
-            }
+            })
     }
 }

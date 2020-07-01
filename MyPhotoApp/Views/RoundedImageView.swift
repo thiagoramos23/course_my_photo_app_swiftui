@@ -9,45 +9,44 @@
 import SwiftUI
 
 struct RoundedImageView: View {
-    @ObservedObject var imageViewModel: ImageViewModel
+    var imageName: String = "lake"
     var cornerRadius: CGFloat = 5
-        
-    var activityView: some View {
+    
+    var url: String
+    
+    @ObservedObject var imageViewModel: ImageViewModel = ImageViewModel()
+    
+    init(url: String) {
+        self.url = url
+    }
+    
+    var loadingView: some View {
         ActivityIndicatorView()
             .onAppear {
-                self.imageViewModel.loadImage()
+                self.imageViewModel.loadImage(url: self.url)
             }
     }
     
-    var defaultImageView: some View {
-        Image("woman")
+    var imageView: some View {
+        Image(uiImage: self.imageViewModel.data.count == 0 ? UIImage(named: imageName)! : UIImage(data: self.imageViewModel.data)!)
             .resizable()
             .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
     
-    var imageFromWeb: some View {
-        self.imageViewModel
-            .image
-            .resizable()
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-    }
-    
-    var showImageFromWeb: some View {
-        switch self.imageViewModel.viewState {
-            case .loading: return AnyView(activityView)
-            case .ready: return AnyView(imageFromWeb)
-            case .error: return AnyView(defaultImageView)
+    var showView: some View {
+        switch self.imageViewModel.imageViewState {
+            case .loading: return AnyView(loadingView)
+            case .ready: return AnyView(imageView)
         }
     }
-    
+        
     var body: some View {
-        showImageFromWeb
+        showView
     }
 }
+
 struct RoundedImageView_Previews: PreviewProvider {
-    static var imageViewModel: ImageViewModel = ImageViewModel(imageUrl: "woman")
     static var previews: some View {
-        imageViewModel.viewState = .ready
-        return RoundedImageView(imageViewModel: imageViewModel)
+        return RoundedImageView(url: "woman")
     }
 }
