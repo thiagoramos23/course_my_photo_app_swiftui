@@ -42,7 +42,7 @@ struct RoundedImageView: View {
     var body: some View {
         Group {
             if(self.image == nil) {
-                Text("Loading...")
+                ActivityIndicatorView()
                     .onAppear {
                         let cachedData = ImageCache.getFromCache(imageUrl: self.imageUrl)
                         if cachedData.count > 0 {

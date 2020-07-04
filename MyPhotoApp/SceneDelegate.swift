@@ -15,20 +15,22 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-
-        // Create the SwiftUI view that provides the window contents.
-        let contentView = FeedView(feedViewModel: FeedViewModel())
-
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = UIHostingController(rootView: contentView)
+            window.rootViewController = UIHostingController(rootView: startingView())
             self.window = window
             window.makeKeyAndVisible()
         }
+    }
+    
+    func startingView() -> some View {
+        let accountData = UserDefaults.standard.object(forKey: Account.LOGGED_IN_ACCOUNT) as? Data
+        if let _ = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(accountData!) {
+            return AnyView(FeedView(feedViewModel: FeedViewModel()))
+        }
+        
+        return AnyView(AuthorizationView(authorizationViewModel: AuthorizationViewModel()))
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
