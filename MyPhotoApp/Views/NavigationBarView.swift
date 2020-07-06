@@ -8,15 +8,23 @@
 
 import SwiftUI
 
-struct NavigationBarView: View {    
+struct NavigationBarView: View {
+    @Binding var showCamera: Bool
+    var onDismiss: (() -> Void)?
+    var modalContent: (() -> AnyView)
+    
     var body: some View {
         ZStack {
             HStack(alignment: .center, spacing: 8) {
-                Button(action: {}) {
+                Button(action: {
+                    self.showCamera.toggle()
+                }) {
                     Image(systemName: "camera")
                     .resizable().frame(width: 25, height: 20)
                 }
                 .foregroundColor(.black)
+                .sheet(isPresented: self.$showCamera, onDismiss: onDismiss, content: modalContent)
+
                 Spacer()
                 Text("PhotoApp")
                     .font(Font.custom("Billabong", size: 26))
@@ -40,6 +48,8 @@ struct NavigationBarView: View {
 
 struct NavigationBarView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBarView()
+        NavigationBarView(showCamera: .constant(false), modalContent: {
+            return AnyView(EmptyView())
+        })
     }
 }

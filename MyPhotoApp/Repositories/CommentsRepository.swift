@@ -13,7 +13,7 @@ struct CommentsRepository {
     
     func loadCommentsByPost(post: Post) -> AnyPublisher<[Comment], Error> {
         var request = URLRequest(url: URL(string: "\(baseUrl)/posts/\(post.id)/comments")!)
-        request.setValue("Bearer JEMRiWH4R-smPatCdVA0LRpqOYFfb-c0421AS-AoP9c", forHTTPHeaderField: "Authorization")
+        request.setValue(Account.loggedInAccessToken(), forHTTPHeaderField: "Authorization")
         return URLSession
             .shared
             .dataTaskPublisher(for: request)

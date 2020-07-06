@@ -47,4 +47,28 @@ class FeedViewModel: ObservableObject {
                 }
             }
     }
+    
+    func postImage(image: UIImage?) {
+        guard let imageTaken = image else {
+            return
+        }
+        
+        if let imageData = imageTaken.pngData() {
+            cancellable = self.postRepository
+                .uploadImage(imageDataToUpload: imageData)
+                .receive(on:  RunLoop.main)
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        print("Finished")
+                        break
+                    case .failure(let error):
+                        print("Error: \(error)")
+                        break
+                    }
+                }, receiveValue: { post in
+                    print(post)
+                })
+        }
+    }
 }

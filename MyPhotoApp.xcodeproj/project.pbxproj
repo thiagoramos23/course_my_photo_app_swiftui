@@ -23,6 +23,9 @@
 		6E75CEDD24A0362800B183DC /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E75CEDC24A0362800B183DC /* ColorExtensions.swift */; };
 		6E8F754824A6F067000AB966 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8F754724A6F067000AB966 /* ImageRepository.swift */; };
 		6E8F754A24A6F4A2000AB966 /* ImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8F754924A6F4A2000AB966 /* ImageViewModel.swift */; };
+		6EA7625C24B26162005FD9F6 /* TakePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA7625B24B26162005FD9F6 /* TakePictureView.swift */; };
+		6EA7625F24B2618B005FD9F6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA7625E24B2618B005FD9F6 /* Coordinator.swift */; };
+		6EA7626124B26535005FD9F6 /* PictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EA7626024B26535005FD9F6 /* PictureView.swift */; };
 		6ED7723024A18D8200C57640 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7722F24A18D8200C57640 /* Post.swift */; };
 		6ED7723324A1916300C57640 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED7723224A1916300C57640 /* ActivityIndicatorView.swift */; };
 		6EE2D19B24A4307800FB55AE /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE2D19A24A4307700FB55AE /* PostRepository.swift */; };
@@ -53,6 +56,9 @@
 		6E75CEDC24A0362800B183DC /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
 		6E8F754724A6F067000AB966 /* ImageRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		6E8F754924A6F4A2000AB966 /* ImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewModel.swift; sourceTree = "<group>"; };
+		6EA7625B24B26162005FD9F6 /* TakePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakePictureView.swift; sourceTree = "<group>"; };
+		6EA7625E24B2618B005FD9F6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		6EA7626024B26535005FD9F6 /* PictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureView.swift; sourceTree = "<group>"; };
 		6ED7722F24A18D8200C57640 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		6ED7723224A1916300C57640 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		6EE2D19A24A4307700FB55AE /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
@@ -98,6 +104,14 @@
 			path = extensions;
 			sourceTree = "<group>";
 		};
+		6EA7625D24B26172005FD9F6 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6EA7625E24B2618B005FD9F6 /* Coordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		6ED7722E24A18D7300C57640 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +125,7 @@
 		6ED7723124A1911500C57640 /* UIKitRepresentable */ = {
 			isa = PBXGroup;
 			children = (
+				6EA7625B24B26162005FD9F6 /* TakePictureView.swift */,
 				6ED7723224A1916300C57640 /* ActivityIndicatorView.swift */,
 			);
 			path = UIKitRepresentable;
@@ -146,6 +161,7 @@
 		DE1F01F52496810F002ABF21 /* MyPhotoApp */ = {
 			isa = PBXGroup;
 			children = (
+				6EA7625D24B26172005FD9F6 /* Coordinator */,
 				6EE2D19924A4306400FB55AE /* Repositories */,
 				6ED7723124A1911500C57640 /* UIKitRepresentable */,
 				6ED7722E24A18D7300C57640 /* Models */,
@@ -182,6 +198,7 @@
 				6E20E9BB24A8DD8200BC0F5A /* CommentsView.swift */,
 				6E20E9BD24A8DE2B00BC0F5A /* CommentView.swift */,
 				6E0A3BF024B0D13E00209633 /* AuthorizationView.swift */,
+				6EA7626024B26535005FD9F6 /* PictureView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -266,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EA7626124B26535005FD9F6 /* PictureView.swift in Sources */,
 				6E20E9C024A8EE5800BC0F5A /* CommentsViewModel.swift in Sources */,
 				6E8F754A24A6F4A2000AB966 /* ImageViewModel.swift in Sources */,
 				6E20E9BE24A8DE2B00BC0F5A /* CommentView.swift in Sources */,
@@ -273,11 +291,13 @@
 				6E20E9C224A8EEDB00BC0F5A /* CommentsRepository.swift in Sources */,
 				6EE2D19B24A4307800FB55AE /* PostRepository.swift in Sources */,
 				6E75CED4249FD21E00B183DC /* FeedViewModel.swift in Sources */,
+				6EA7625C24B26162005FD9F6 /* TakePictureView.swift in Sources */,
 				6E0A3BF724B0E15100209633 /* LoginRepository.swift in Sources */,
 				6E2ED85F24B11DDF008A41EA /* Account.swift in Sources */,
 				6E75CEDA249FD80800B183DC /* NavigationBarView.swift in Sources */,
 				DE1F020C2496814A002ABF21 /* FeedView.swift in Sources */,
 				6E75CED6249FD79900B183DC /* RoundedImageView.swift in Sources */,
+				6EA7625F24B2618B005FD9F6 /* Coordinator.swift in Sources */,
 				6E75CEDD24A0362800B183DC /* ColorExtensions.swift in Sources */,
 				6E8F754824A6F067000AB966 /* ImageRepository.swift in Sources */,
 				6ED7723324A1916300C57640 /* ActivityIndicatorView.swift in Sources */,

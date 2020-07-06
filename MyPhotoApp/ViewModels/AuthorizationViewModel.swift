@@ -71,9 +71,7 @@ class AuthorizationViewModel: ObservableObject {
                     break
                 }
             }) { account in
-                if let archivedAccount = try? NSKeyedArchiver.archivedData(withRootObject: account, requiringSecureCoding: false) {
-                    UserDefaults.standard.set(archivedAccount, forKey: Account.LOGGED_IN_ACCOUNT)
-                }
+                account.storeAccount()
             }
     }
 }

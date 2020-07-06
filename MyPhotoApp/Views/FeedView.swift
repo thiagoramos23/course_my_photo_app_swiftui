@@ -19,6 +19,9 @@ struct FeedView: View {
     @State var show = false
     @State var activeIndex: Int = -1
     
+    @State var showCamera: Bool = false
+    @State var imageTaken: UIImage? = nil
+    
     var imageViewModel: ImageViewModel
     
     init(feedViewModel: FeedViewModel) {
@@ -71,9 +74,16 @@ struct FeedView: View {
     var body: some View {
         ZStack {
             VStack {
-                NavigationBarView()
-                    .offset(y: self.show ? -200 : 0)
-                    .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
+                NavigationBarView(showCamera: $showCamera, onDismiss: {
+                    DispatchQueue.global(qos: .background).async {
+                        self.feedViewModel.postImage(image: self.imageTaken)
+                        self.imageTaken = nil
+                    }
+                }, modalContent: {
+                    AnyView(PictureView(showCamera: self.$showCamera, image: self.$imageTaken))
+                })
+                .offset(y: self.show ? -200 : 0)
+                .animation(.spring(response: 0.5, dampingFraction: 0.6, blendDuration: 0))
 
                 showView
             }

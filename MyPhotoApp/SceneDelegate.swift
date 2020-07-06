@@ -25,8 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func startingView() -> some View {
-        let accountData = UserDefaults.standard.object(forKey: Account.LOGGED_IN_ACCOUNT) as? Data
-        if let _ = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(accountData!) {
+        if let accountData = UserDefaults.standard.object(forKey: Account.LOGGED_IN_ACCOUNT) as? Data,
+           let _ = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(accountData) {
             return AnyView(FeedView(feedViewModel: FeedViewModel()))
         }
         

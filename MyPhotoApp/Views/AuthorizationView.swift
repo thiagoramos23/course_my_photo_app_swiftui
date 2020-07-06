@@ -68,7 +68,7 @@ struct AuthorizationView: View {
                     self.login()
                 }) {
                     Text("LOG IN")
-                        .frame(minWidth: 200)
+                        .frame(minWidth: 100)
                         .padding(.leading, 100)
                         .padding(.trailing, 100)
                         .padding(.top)

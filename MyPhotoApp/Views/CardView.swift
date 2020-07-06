@@ -60,9 +60,11 @@ struct CardView: View {
                 }
                 .padding()
                 
-                CommentsView(post: self.post, commentsViewModel: self.commentsViewModel, imageViewModel: self.imageViewModel)
-                    .opacity(self.post.showComment ? 1 : 0)
-                    .animation(.easeInOut)
+                if self.post.showComment {
+                    CommentsView(post: self.$post, commentsViewModel: self.commentsViewModel, imageViewModel: self.imageViewModel)
+                        .opacity(self.post.showComment ? 1 : 0)
+                        .animation(.easeInOut)
+                }
             }
             .onTapGesture {
                 self.post.showComment.toggle()
